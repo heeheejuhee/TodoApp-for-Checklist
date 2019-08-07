@@ -1,89 +1,94 @@
 import React, {Component} from 'react';
+// import logo from './logo.svg';
+import NewTodoForm from './NewTodoForm';
+import Todo from './Todo';
 import './App.css';
 
-class TodoApp extends Component {
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        todos : [
+      todos: [
         {
           id:1,
-          content:'Hi Juhee'
+          content:'Eat Lunch'
         },
         {
+
           id:2,
-          content:'How are you '
-        },
-        {
-          id:3,
-          content:'How is the weather'
+          content:'Have a drink'
         }
-      ],
-
-      todoInputValue:''
-    }
-  }
-
-  handleTodoInputChange = (e) => { 
-
-    this.setState({
-      todoInputValue:e.target.value
-    })
-  }
-
-  handleAddTodoClick = (e) => {
-    e.preventDefault();
-
-    var newTodo = {
-      id:Date.now(),
-      content: this.state.todoInputValue
+        
+      ]
     };
+  }
 
-    var newList = [newTodo,...this.state.todos]
-    this.setState({
-      todos:newList,
-      todoInputValue:''
-    })
+  addTodo = (data) => {
+    var newTodo = {
+      id: Date.now(),
+      ...data
+    };
+    var todos = [newTodo,...this.state.todos];
+    this.setState({todos});
   }
 
   removeTodo = (id) => {
     var todos = this.state.todos;
-
-    var filteredList = todos.filter((todo) => {
-      return todo.id != id;
+    var filtered = todos.filter((todo) => {
+      return todo.id !== id;
     });
 
     this.setState({
-      todos:filteredList
-    })
+      todos: filtered
+    });
+  }
+
+  updateTodo = (id,data) => {
+
+    var todos = this.state.todos;
+
+    var index = todos.findIndex((item) => {
+      return item.id == id;
+    });
+
+
+    var updatedItem = {...todos[index],...data}
+    todos[index] = updatedItem;
+    this.setState({
+      todos: todos
+    });
   }
 
 
-  render() {
-
-    return(
+  render(){
+    return (
       <div className="wrap">
-          <h1>Daily Todo Lists</h1>
+        <NewTodoForm addTodo={this.addTodo}/>
+        <div className="todos">
+          {
+            this.state.todos.map((todo) => {
 
-          <form>
-            <input className="todo-input" type="text" value={this.state.todoInputValue} onChange={this.handleTodoInputChange }/>
-            <input className="add-todo" onClick={this.handleAddTodoClick} type="submit"/>
-          </form>
+              var todoProps = {
+                ...todo,
+                key: todo.id
 
-          <ul>
-            {
-              this.state.todos.map((todo) => {
-                return (
-                  <li><div onClick={(e) => { this.removeTodo(todo.id) }}>x</div> {todo.content}</li>
-                );
-              })
-            }  
-          </ul>
+              };
+              return (
+                <Todo {...todoProps}/>
+              )
+            })
+          }
 
+
+         
+
+        </div>
       </div>
-    )
-  };
-};
 
 
-export default TodoApp;
+    );
+  }
+  
+}
+
+export default App;

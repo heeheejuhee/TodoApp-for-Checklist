@@ -1,22 +1,52 @@
 @import 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css';
 @import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css';
-@import 'https://use.fontawesome.com/releases/v5.8.2/css/all.css'
 
 .wrap {
-  margin: auto;
-  width: 60%;
-  height: 100%;
-  border: 1px red solid;
-  display: inline-block;
-}
-
-h1 {
+  background-color: #e74c3c;
   text-align: center;
-  margin: 1em;
-  background-color: purple;
-  padding: 0.5em;
+  width: 48%;
+  margin:0 auto;
+  margin-top: 40px;
+  padding: 15px;
+  border-radius: 5px;
 }
 
-form {
+.todo-input {
+  padding: 5px;
+  font-size: 16px;
+  border: 3px solid #FFF;
+  border-radius: 5px;
+}
 
+.add-todo {
+  padding: 5px 13px;
+  font-size: 16px;
+  margin: 10px;
+  border-radius: 5px;
+  background-color: #2c3e50;
+  color: #FFF;
+  border: 2px solid #2c3e50;
+}
+
+.add-todo:hover {
+  background-color: #5a84ab;
+  border: 2px solid #5a84ab;
+}
+
+/*todolist*/
+
+.todos {
+  width: 60%;
+  text-align: left;
+  margin:0 auto;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.todo {
+  font-size: 20px;
+  background-color: #FB6964;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
 }
